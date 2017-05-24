@@ -25,7 +25,70 @@ int main(int argc, char *argv[]) {
       exit(1);
    }
 
-/* your code goes here */   
+// Code starts here
+
+  /*   
+   int i = 0;
+   int count = 0;
+   for (int i = 0; i < 169; i++)
+   {
+      printf("%02i:%02i  " , Array[i] / 64, Array[i] % 64);
+      count++;
+      if (count == 13)
+      {
+         printf("\n");
+         count = 0;
+      }
+   }
+   */
+   
+
+   /********************** Inefficient Algorithm for C *************************
+    **********************************************************************/
+   int i = 0;
+   int k = 0;
+   int c = 0;
+   int j = 0;
+   int hue1,hue2,diam1,diam2;
+   int temp;
+   for (k = 0; k < 10; k++)      // Arbitrary value selected until sorted
+   {
+      for (i = 0; i < 13; i++)           
+      {
+         for (c = 0; c < 13; c++)                    // Sort Hues
+          {
+              for (j = c + 1; j < 13; ++j)
+              {
+               hue1 = Array[c + (i * 13)] % 64;
+               hue2 = Array[j + (i * 13)] % 64;
+                  if (hue1 > hue2 && Array[c + (i * 13)] != -1 && Array[j + (i * 13)] != -1)        
+                  {
+                      temp =  Array[c + (i * 13)];          
+                      Array[c + (i * 13)] = Array[j + (i * 13)];
+                      Array[j + (i * 13)] = temp;
+
+                  }
+              }
+          }
+          for (c = 0; c < 169; c = c + 13)           // Sort Diameter
+          {
+              for (j = c + 13; j < 169; j = j + 13)
+              {
+               diam1 = Array[c + i] / 64;
+               diam2 = Array[j + i] / 64;
+                  if (diam1 > diam2 && Array[c + i] != -1 && Array[j + i] != -1)        
+                  {
+                      temp =  Array[c + i];          
+                      Array[c + i] = Array[j + i];
+                      Array[j + i] = temp;
+
+                  }
+              }
+          }
+      }
+   }
+
+   printf("\n\n");
 
    Print_Array(Array);
    exit(0);
